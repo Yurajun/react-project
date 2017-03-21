@@ -23,17 +23,38 @@ let Article = React.createClass({
 });
 
 let ArticleList = React.createClass({
+	getInitialState: function() {
+		return {
+			displayedContacts: ARTICLES
+		};
+	},
+
+	handleSearch: function(event) {
+		var searchQuery = event.target.value.toLowerCase();
+		var displayedContacts = ARTICLES.filter(function(el) {
+		var searchValue = el.author.toLowerCase();
+			return searchValue.indexOf(searchQuery) !== -1;
+		});
+
+		this.setState({
+			displayedContacts: displayedContacts
+		});
+	},
+
 	render: function (){
 		return (
-			<ul>
-				{
-					ARTICLES.map(function (el){
-						return <Article key={el.id}
-														author={el.author}
-														article={el.article} />;
-					})
-				}
-			</ul>
+			<div>
+				<input type='text' onChange={this.handleSearch} />
+				<ul>
+					{
+						this.state.displayedContacts.map(function (el){
+							return <Article key={el.id}
+															author={el.author}
+															article={el.article} />;
+						})
+					}
+				</ul>
+			</div>
 		);
 	}
 });
