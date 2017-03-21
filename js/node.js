@@ -6,6 +6,39 @@ let ARTICLES = [
 	}, {
 		id: 2,
 		author: 'Vasya Pupkin',
-		aritcle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate non omnis facilis, tempora! Doloribus veritatis, suscipit nostrum aperiam minus, provident neque ipsum repellat deserunt totam alias optio blanditiis architecto! Laudantium iste laboriosam repellendus reiciendis commodi illo ullam beatae porro possimus unde nihil, veniam inventore alias, et fugit dolores quas. Reprehenderit id quos sapiente natus dignissimos ab eius aperiam maxime provident, quod laborum esse dolorem possimus repudiandae inventore accusantium iure unde veritatis ut dolore qui minima quasi sint necessitatibus sunt. Ad ut velit adipisci beatae reprehenderit, impedit facilis. Hic quasi quos perspiciatis architecto earum minus et, ea fugit, voluptas, at quas.'
+		article: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate non omnis facilis, tempora! Doloribus veritatis, suscipit nostrum aperiam minus, provident neque ipsum repellat deserunt totam alias optio blanditiis architecto! Laudantium iste laboriosam repellendus reiciendis commodi illo ullam beatae porro possimus unde nihil, veniam inventore alias, et fugit dolores quas. Reprehenderit id quos sapiente natus dignissimos ab eius aperiam maxime provident, quod laborum esse dolorem possimus repudiandae inventore accusantium iure unde veritatis ut dolore qui minima quasi sint necessitatibus sunt. Ad ut velit adipisci beatae reprehenderit, impedit facilis. Hic quasi quos perspiciatis architecto earum minus et, ea fugit, voluptas, at quas.'
 	}
 ];
+
+
+let Article = React.createClass({
+	render: function (){
+		return (
+			<li>
+				<div> {this.props.author} </div>
+				<div> {this.props.article} </div>
+			</li>
+		);
+	}
+});
+
+let ArticleList = React.createClass({
+	render: function (){
+		return (
+			<ul>
+				{
+					ARTICLES.map(function (el){
+						return <Article key={el.id}
+														author={el.author}
+														article={el.article} />;
+					})
+				}
+			</ul>
+		);
+	}
+});
+
+ReactDOM.render(
+	<ArticleList />,
+	document.querySelector('.content')
+);
